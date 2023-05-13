@@ -22,5 +22,19 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    host: '0.0.0.0',
+    proxy: {
+      //代理所有 /api 的请求
+      "/api": {
+        // 代理请求之后的请求地址
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        target: "http://localhost:26659",
+        // 跨域配置
+        changeOrigin: true
+      }
+    }
+  },
+
 
 })
